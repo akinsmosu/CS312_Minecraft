@@ -25,18 +25,25 @@ The stages are completed by first running the Terraform scripts and then running
 
 ## How to run the scripts
 1. Clone the repository
-2. Run the Terraform scripts
+2. Configure your AWS credentials
+    ```bash
+    aws configure set aws_access_key_id "<youraccesskey>"
+    aws configure set aws_secret_access_key "<yoursecretkey>"
+    aws configure set aws_session_token "<yourtoken>"
+    ```
+3. Run the Terraform scripts
     ```bash
     terraform init
     terraform apply
     ```
-3. Run the Ansible playbook
+4. Confirm the IP address that is outputted after running `terraform apply` is the same as the IP address in the `hosts` file (replace if needed).
+5. Run the Ansible playbook
     ```bash
     ansible-playbook -i hosts minecraft_server.yml
     ```
-4. Confirm the server is running with the following command:
+6. Confirm the server is running with the following command:
       ```bash
-      nmap -sV -p T:25565 <public_ip>
+      nmap -sV -Pn -p T:25565 <public_ip>
       ```
   - Replace `<public_ip>` with the public IP of the EC2 instance that is displayed in the Terraform output.
 
