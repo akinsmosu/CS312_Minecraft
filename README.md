@@ -49,7 +49,7 @@ The stages are completed by first running the Terraform scripts and then running
 
 
 ## Resources
-- Terrform Docs: https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+- Terraform Docs: https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 - AWS Docs: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 - mineOps - Part 2: Automation with Ansible: https://blog.kywa.io/mineops-part-2/
 - Deploying (Minecraft) Servers Automatically with Terraform: https://www.endpointdev.com/blog/2020/07/automating-minecraft-server/
