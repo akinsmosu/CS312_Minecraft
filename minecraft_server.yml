@@ -1,0 +1,68 @@
+---
+- name: Setup Minecraft Server on AWS
+  hosts: minecraft_server
+  become: yes
+
+  tasks:
+    - name: Ensure necessary packages are installed
+      apt:
+        name: wget
+        state: present
+        update_cache: yes
+
+    - name: Download Minecraft Server
+      get_url:
+        url: https://piston-data.mojang.com/v1/objects/145ff0858209bcfc164859ba735d4199aafa1eea/server.jar
+        dest: /home/ubuntu/server.jar
+        mode: '0644'
+
+    - name: Install Java
+      apt:
+        name: openjdk-21-jdk
+        state: present
+    
+    - name: Create Minecraft Server start script
+      copy:
+        dest: /home/ubuntu/mc_server_start.sh
+        content: |
+          #!/bin/bash
+          java -Xmx1024M -Xms1024M -jar /home/ubuntu/server.jar nogui
+        mode: '0755'
+
+    - name: Set up EULA
+      copy:
+        dest: /home/ubuntu/eula.txt
+        content: |
+          eula=true
+        mode: '0644'
+    
+    - name: Create systemd service file for Minecraft Server
+      copy:
+        dest: /etc/systemd/system/minecraft.service
+        content: |
+          [Unit]
+          Description=Minecraft Server
+          After=network.target
+          
+          [Service]
+          User=ubuntu
+          Group=ubuntu
+          WorkingDirectory=/home/ubuntu
+          ExecStart=/home/ubuntu/mc_server_start.sh
+          RemainAfterExit=true
+          Restart=on-failure
+          RestartSec=5
+          
+          [Install]
+          WantedBy=multi-user.target
+        mode: '0644'
+    
+    - name: Reload systemd daemon
+      command: sudo systemctl daemon-reload
+    
+    - name: Start Minecraft service
+      service:
+        name: minecraft
+        state: started
+        enabled: yes
+    
