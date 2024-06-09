@@ -1,7 +1,7 @@
 # Minecraft Server using Terraform
 
 ## Requirements
-1. A personal computer with internet connection and Git installed.
+1. A personal computer with internet connection and Python and Git installed.
 2. An AWS account (AWS Academy is used here)
 3. Terraform CLI installed [Install Instructions](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 4. AWS CLI installed [Install Instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
@@ -49,3 +49,10 @@ The stages are completed by first running the Terraform scripts and then running
 
 
 ## Resources
+- Terrform Docs: https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+- AWS Docs: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+- mineOps - Part 2: Automation with Ansible: https://blog.kywa.io/mineops-part-2/
+- Deploying (Minecraft) Servers Automatically with Terraform: https://www.endpointdev.com/blog/2020/07/automating-minecraft-server/
+- The above articles got me started, but pretty much every question I had was resolved in office hours. Thanks!
+
+
